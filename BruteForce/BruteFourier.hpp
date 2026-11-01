@@ -1,11 +1,7 @@
 #pragma once
 #include "Signal.hpp"
 #define PI 3.1415926535
-#define euler 2.718281828459
 
-typedef struct Twiddle_Factor
-{
-    
-} Twiddle_Factor;
+inline Complex compute_twiddle(double angular_frequency, int n);
 
 Signal bruteForce_DFT(Signal input_signal);

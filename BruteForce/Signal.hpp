@@ -15,6 +15,10 @@ typedef struct Complex
 
     bool operator==(const Complex& other) const;
     bool operator!=(const Complex& other) const;
+    Complex operator*(const Complex& other);
+    Complex& operator+(const Complex& other);
+    Complex& operator+=(const Complex& other);
+    void operator=(const Complex& other);
 
 } Complex;
 
@@ -24,8 +28,13 @@ typedef struct Signal
     std::vector<Complex> signal;
     
     Signal(std::initializer_list<Complex> list);
+    Signal();
+
+    size_t size() const;
+    void add_signal_component(Complex signal_component);
         
     Complex& operator[](int idx);
+    void operator=(const Signal& other);
 
 } Signal;
 
