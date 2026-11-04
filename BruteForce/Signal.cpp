@@ -15,12 +15,12 @@ Signal::Signal()
 bool Complex::operator==(const Complex& other) const
 {
     return this->real == other.real && this->imag == other.imag;
-}
+}   
 
 bool Complex::operator!=(const Complex& other) const
 {
     return !(*this == other);
-}
+}  
 
 Complex Complex::operator*(const Complex& other)
 {
@@ -33,6 +33,13 @@ Complex Complex::operator*(const Complex& other)
 
 Complex& Complex::operator+(const Complex& other)
 {
+    this->real += other.real;
+    this->imag += other.imag;
+    return *this;
+}
+
+Complex& Complex::operator=(const Complex& other)
+{
     this->real = other.real;
     this->imag = other.imag;
     return *this;
@@ -40,19 +47,19 @@ Complex& Complex::operator+(const Complex& other)
 
 Complex& Complex::operator+=(const Complex& other)
 {
-    return *this + other;
-}
-
-void Complex::operator=(const Complex& other)
-{
-    this->real = other.real;
-    this->imag = other.imag;
+    *this = *this + other;
+    return *this;
 }
 
 void Complex::set(double r, double i)
 {
     this->real = r;
     this->imag = i;
+}
+
+double Complex::magnitude() const
+{
+    return sqrt(real * real + imag * imag);
 }
 
 size_t Signal::size() const
@@ -70,15 +77,16 @@ Complex& Signal::operator[](int idx)
     return signal.at(idx); 
 }
 
-void Signal::operator=(const Signal& other)
+Signal& Signal::operator=(const Signal& other)
 {
-    signal = other.signal;
+    this->signal = other.signal;
+    return *this;
 }
 
 std::ostream& operator<<(std::ostream& out, const Complex& obj)
 {
-    out << obj.real << " " << ((obj.imag < 0) ? "-" : "+")
-        << " " << abs(obj.imag) << "i";
+    out << std::fixed << std::setprecision(2) << obj.real << " " << ((obj.imag < 0) ? "-" : "+")
+        << " " << ((obj.imag < 0) ? obj.imag * -1 : obj.imag) << "i";
     return out;
 }
 

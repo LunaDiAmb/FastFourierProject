@@ -2,6 +2,7 @@
 #include <iostream>
 #include <complex>
 #include <vector>
+#include <iomanip>
 
 typedef struct Complex 
 {
@@ -12,13 +13,14 @@ typedef struct Complex
     Complex();
 
     void set(double r, double i);
+    double magnitude() const;
 
     bool operator==(const Complex& other) const;
     bool operator!=(const Complex& other) const;
     Complex operator*(const Complex& other);
     Complex& operator+(const Complex& other);
     Complex& operator+=(const Complex& other);
-    void operator=(const Complex& other);
+    Complex& operator=(const Complex& other);
 
 } Complex;
 
@@ -34,7 +36,7 @@ typedef struct Signal
     void add_signal_component(Complex signal_component);
         
     Complex& operator[](int idx);
-    void operator=(const Signal& other);
+    Signal& operator=(const Signal& other);
 
 } Signal;
 
