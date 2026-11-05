@@ -17,7 +17,7 @@ Signal bruteForce_DFT(Signal input_signal)
         signal_point_output.set(0.0, 0.0);
         for(int n = 0; n < num_samples; ++n)
         {
-            angular_frequency = (2 * PI) * ((double)k / (double)num_samples);
+            angular_frequency = (2 * PI) * (k / (double)num_samples);
             twiddle = compute_twiddle(angular_frequency, n);
             signal_point_output += (twiddle * input_signal[n]);
         }
@@ -28,7 +28,7 @@ Signal bruteForce_DFT(Signal input_signal)
     return output_signal;
 }
 
-Signal cooley_tukey_FDFT(Signal input_signal)
-{
+// Signal cooley_tukey_FDFT(Signal input_signal)
+// {
     
-}
+// }

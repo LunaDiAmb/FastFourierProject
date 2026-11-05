@@ -22,19 +22,44 @@ bool Complex::operator!=(const Complex& other) const
     return !(*this == other);
 }  
 
-Complex Complex::operator*(const Complex& other)
+Complex& Complex::operator*(const Complex& other)
 {
     // (a + bi)(c + di) = (ac - bd) + i(ad + bc)
-    return Complex(
-        (this->real * other.real - this->imag * other.imag), 
-        (this->real * other.imag + this->imag * other.real)
-    );
+    this->real *= other.real;
+    this->imag *= other.imag;
+    return *this;
+}
+
+Complex& Complex::operator*=(const Complex& other)
+{
+    *this = *this * other;
+    return *this;
+}
+
+Complex& Complex::operator*(int other)
+{
+    this->real *= other;
+    this->imag *= other;
+    return *this;
+}
+
+Complex& Complex::operator*=(int other)
+{
+    *this = *this * other;
+    return *this;
 }
 
 Complex& Complex::operator+(const Complex& other)
 {
     this->real += other.real;
     this->imag += other.imag;
+    return *this;
+}
+
+Complex& Complex::operator-(const Complex& other)
+{
+    this->real -= other.real;
+    this->imag -= other.imag;
     return *this;
 }
 
@@ -48,6 +73,12 @@ Complex& Complex::operator=(const Complex& other)
 Complex& Complex::operator+=(const Complex& other)
 {
     *this = *this + other;
+    return *this;
+}
+
+Complex& Complex::operator-=(const Complex& other)
+{
+    *this = *this - other;
     return *this;
 }
 

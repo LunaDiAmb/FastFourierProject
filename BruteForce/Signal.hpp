@@ -17,9 +17,14 @@ typedef struct Complex
 
     bool operator==(const Complex& other) const;
     bool operator!=(const Complex& other) const;
-    Complex operator*(const Complex& other);
+    Complex& operator*(const Complex& other);
+    Complex& operator*=(const Complex& other);
+    Complex& operator*(int other);
+    Complex& operator*=(int other);
     Complex& operator+(const Complex& other);
+    Complex& operator-(const Complex& other);
     Complex& operator+=(const Complex& other);
+    Complex& operator-=(const Complex& other);
     Complex& operator=(const Complex& other);
 
 } Complex;
