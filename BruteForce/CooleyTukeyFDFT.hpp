@@ -8,8 +8,8 @@
 #include "Signal.hpp"
 
 void fft(Signal input_signal, 
-	Signal output,
+	Signal* output,
 	int N);
-void fft_rec(Signal x, int N);
+void fft_rec(Signal* x, int N);
 
 #endif

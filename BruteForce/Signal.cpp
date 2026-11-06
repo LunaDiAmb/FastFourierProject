@@ -22,12 +22,13 @@ bool Complex::operator!=(const Complex& other) const
     return !(*this == other);
 }  
 
-Complex& Complex::operator*(const Complex& other)
+Complex Complex::operator*(const Complex& other) const
 {
     // (a + bi)(c + di) = (ac - bd) + i(ad + bc)
-    this->real *= other.real;
-    this->imag *= other.imag;
-    return *this;
+    return Complex(
+        this->real * other.real - this->imag * other.imag,
+        this->real * other.imag + this->imag * other.real
+    );
 }
 
 Complex& Complex::operator*=(const Complex& other)
@@ -36,11 +37,9 @@ Complex& Complex::operator*=(const Complex& other)
     return *this;
 }
 
-Complex& Complex::operator*(int other)
+Complex Complex::operator*(int other) const
 {
-    this->real *= other;
-    this->imag *= other;
-    return *this;
+    return Complex(this->real * other, this->imag * other);
 }
 
 Complex& Complex::operator*=(int other)
@@ -49,18 +48,14 @@ Complex& Complex::operator*=(int other)
     return *this;
 }
 
-Complex& Complex::operator+(const Complex& other)
+Complex Complex::operator+(const Complex& other) const
 {
-    this->real += other.real;
-    this->imag += other.imag;
-    return *this;
+    return Complex(this->real + other.real, this->imag + other.imag);
 }
 
-Complex& Complex::operator-(const Complex& other)
+Complex Complex::operator-(const Complex& other) const
 {
-    this->real -= other.real;
-    this->imag -= other.imag;
-    return *this;
+    return Complex(this->real - other.real, this->imag - other.imag);
 }
 
 Complex& Complex::operator=(const Complex& other)
@@ -102,9 +97,21 @@ void Signal::add_signal_component(Complex signal_component)
 {
     signal.push_back(signal_component);
 }
+
+void Signal::add_signal_components(std::initializer_list<Complex> components)
+{
+    for(Complex c : components)
+    {
+        signal.push_back(c);
+    }
+}
     
 Complex& Signal::operator[](int idx) 
 { 
+    if(idx >= signal.size())
+    {
+        throw std::runtime_error("Signal object of size " + std::to_string(size()) + " was indexed at " + std::to_string(idx) + ".");
+    }
     return signal.at(idx); 
 }
 
