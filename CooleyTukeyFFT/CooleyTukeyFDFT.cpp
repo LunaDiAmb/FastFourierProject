@@ -1,7 +1,6 @@
 #include "CooleyTukeyFDFT.hpp"
-#include "BruteFourier.hpp"
 
-void CT_FFT(const Signal& input_signal, Signal* output, int N) 
+void CT_FFT(Signal& input_signal, Signal* output, int N) 
 {
 	for (int i = 0; i < N; i++) 
 	{ // copy input_signal into output signal pointer 
@@ -41,3 +40,4 @@ void CT_FFT_recursiveHelper(Signal* overall_signal, int N)
 		(*overall_signal)[N / 2 + k] = (*even)[k] - twiddle_times_point;
 	}
 }
+

@@ -40,14 +40,16 @@ typedef struct Signal
     Signal();
 
     size_t size() const;
+    void clear();
     void add_signal_component(Complex signal_component);
     void add_signal_components(std::initializer_list<Complex> components);
         
     Complex& operator[](int idx);
+    const Complex& operator[](int idx) const;
     Signal& operator=(const Signal& other);
 
 } Signal;
 
-std::ostream& operator<<(std::ostream& out, const Complex& obj);
+std::ostream& operator<<(std::ostream& out, Complex& obj);
 
-std::ostream& operator<<(std::ostream& out, const Signal& obj);
+std::ostream& operator<<(std::ostream& out, Signal& obj);

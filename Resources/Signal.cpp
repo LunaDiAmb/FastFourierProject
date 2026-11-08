@@ -93,6 +93,11 @@ size_t Signal::size() const
     return signal.size();
 }
 
+void Signal::clear()
+{
+    signal.clear();
+}
+
 void Signal::add_signal_component(Complex signal_component)
 {
     signal.push_back(signal_component);
@@ -106,7 +111,7 @@ void Signal::add_signal_components(std::initializer_list<Complex> components)
     }
 }
     
-Complex& Signal::operator[](int idx) 
+Complex& Signal::operator[](int idx)
 { 
     if(idx >= signal.size())
     {
@@ -115,26 +120,35 @@ Complex& Signal::operator[](int idx)
     return signal.at(idx); 
 }
 
+const Complex& Signal::operator[](int idx) const
+{
+    if(idx >= signal.size())
+    {
+        throw std::runtime_error("Signal object of size " + std::to_string(size()) + " was indexed at " + std::to_string(idx) + ".");
+    }
+    return signal.at(idx);
+}
+
 Signal& Signal::operator=(const Signal& other)
 {
     this->signal = other.signal;
     return *this;
 }
 
-std::ostream& operator<<(std::ostream& out, const Complex& obj)
+std::ostream& operator<<(std::ostream& out, Complex& obj)
 {
     out << std::fixed << std::setprecision(2) << obj.real << " " << ((obj.imag < 0) ? "-" : "+")
         << " " << ((obj.imag < 0) ? obj.imag * -1 : obj.imag) << "i";
     return out;
 }
 
-std::ostream& operator<<(std::ostream& out, const Signal& obj)
+std::ostream& operator<<(std::ostream& out, Signal& obj)
 {
     out << "[";
-    for(const auto& item : obj.signal)
+    for(int i = 0; i < obj.size(); ++i)
     {
-        out << item;
-        if(item != obj.signal[obj.signal.size() - 1])
+        out << obj[i];
+        if(i != obj.size() - 1)
         {
             out << ", ";
         }

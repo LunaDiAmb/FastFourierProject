@@ -4,6 +4,6 @@
 
 Complex compute_twiddle(double angular_frequency, int n);
 
-Signal bruteForce_DFT(Signal input_signal);
+Signal bruteForce_DFT(const Signal& input_signal);
 
 // Signal cooley_tukey_FDFT(Signal input_signal);

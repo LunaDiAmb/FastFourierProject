@@ -1,5 +1,6 @@
 #include <iostream>
 #include "CooleyTukeyFDFT.hpp"
+#include "../Resources/Signal.hpp"
 
 int main() // testing 
 {
@@ -16,10 +17,10 @@ int main() // testing
     // }
 
 	input_signal.add_signal_components({
-		Complex(1.0, 0.0), Complex(2.0, 0.0),
-		Complex(1.0, 4.0), Complex(2.5, 1.0),
-		Complex(5.5, 1.5), Complex(2.0, 0.0),
-		Complex(4.0, 1.5), Complex(5.5, 6.0)
+		Complex(1.0, 0.0), Complex(0.0, 0.0),
+		Complex(0.0, 0.0), Complex(0.0, 0.0),
+		Complex(0.0, 0.0), Complex(0.0, 0.0),
+		Complex(0.0, 0.0), Complex(0.0, 0.0)
 	});
 
 	Signal output_v;
